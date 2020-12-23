@@ -1,0 +1,9 @@
+{ parameter (list (pair bls12_381_g1 bls12_381_g2)) ;
+  storage bool ;
+  code { UNPAIR ;
+         PAIRING_CHECK ;
+         SOME ;
+         IF_NONE {} { SWAP ; DROP } ;
+         NIL operation ;
+         PAIR } }
+
