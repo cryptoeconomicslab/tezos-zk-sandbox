@@ -14,3 +14,9 @@ docker run -it --rm -p 8732:8732 registry.gitlab.com/tezos/flextesa:master-run e
 npm run compile
 npm test
 ```
+
+## Roadmap
+
+- [x] connecting to tezos node(edo protocol)
+- [x] compile LIGO code using new op-code
+- [] pass test with valid proof
