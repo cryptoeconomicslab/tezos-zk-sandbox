@@ -20,41 +20,14 @@ declare interface Contract<T> {
 }
 
 declare interface Artifacts {
-  require(name: "migrations"): Contract<TokenContractInstance>;
-  require(name: "stez"): Contract<TokenContractInstance>;
-  require(name: "manager"): Contract<ManagerContractInstance>;
+  require(name: "migrations"): Contract<MainContractInstance>;
+  require(name: "main"): Contract<MainContractInstance>;
 }
 
-declare interface ManagerContractInstance {
-  address: string;
-  initiateToken(): any;
-}
 
-declare interface TokenContractInstance {
+declare interface MainContractInstance {
   address: string;
-  transfer(sender: string, receiver: string, amount: number): any;
-  approve(spender: string, amount: number): any;
-  getBalance(owner: string, contract: any): any;
-  getAllowance(owner: string, spender: string, contract: any): any;
-  getTotalSupply(unit: any, contract: any): any;
-}
-
-declare interface FactoryContractInstance {
-  address: string;
-  launchExchange(tokenAddress: string, amount: number): any;
-  setDexFunction(index: number, func: any): any;
-  setTokenFunction(index: number, func: any): any;
-}
-
-declare interface DexContractInstance {
-  address: string;
-  transfer(sender: string, receiver: string, amount: number): any;
-  approve(spender: string, amount: number): any;
-  getBalance(owner: string, contract: any): any;
-  getAllowance(owner: string, spender: string, contract: any): any;
-  getTotalSupply(unit: any, contract: any): any;
-  use(index: number, funcName: string, ...args: any[]): any;
-  default(unit: any): any;
+  verify(): any;
 }
 
 declare var artifacts: Artifacts;

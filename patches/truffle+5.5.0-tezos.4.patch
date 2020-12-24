@@ -1,0 +1,187 @@
+diff --git a/node_modules/truffle/build/cli.bundled.js b/node_modules/truffle/build/cli.bundled.js
+index a84a254..d0557c1 100755
+--- a/node_modules/truffle/build/cli.bundled.js
++++ b/node_modules/truffle/build/cli.bundled.js
+@@ -72768,6 +72768,162 @@ var ChainIDToken = /** @class */ (function (_super) {
+     return ChainIDToken;
+ }(ComparableToken));
+ 
++/* start BLS12-381 */
++var BLS12_381FrToken = /** @class */ (function (_super) {
++    __extends(BLS12_381FrToken, _super);
++    function BLS12_381FrToken(val, idx, fac) {
++        var _this = _super.call(this, val, idx, fac) || this;
++        _this.val = val;
++        _this.idx = idx;
++        _this.fac = fac;
++        return _this;
++    }
++    BLS12_381FrToken.prototype.ToBigMapKey = function (val) {
++        return {
++            key: { bls12_381_fr: val },
++            type: { prim: BLS12_381FrToken.prim },
++        };
++    };
++    BLS12_381FrToken.prototype.isValid = function (val) {
++        return null
++    };
++    BLS12_381FrToken.prototype.Encode = function (args) {
++        var val = args.pop();
++        var err = this.isValid(val);
++        if (err) {
++            throw err;
++        }
++        return { bls12_381_fr: String(val).toString() };
++    };
++    BLS12_381FrToken.prototype.EncodeObject = function (val) {
++        var err = this.isValid(val);
++        if (err) {
++            throw err;
++        }
++        return { bls12_381_fr: String(val).toString() };
++    };
++    BLS12_381FrToken.prototype.Execute = function (val) {
++        return val.bls12_381_fr;
++    };
++    BLS12_381FrToken.prototype.ExtractSchema = function () {
++        return BLS12_381FrToken.prim;
++    };
++    // tslint:disable-next-line: variable-name
++    BLS12_381FrToken.prototype.ToKey = function (_a) {
++        var bls12_381_fr = _a.bls12_381_fr, string = _a.string;
++        if (string) {
++            return string;
++        }
++        return bls12_381_fr;
++    };
++    BLS12_381FrToken.prim = 'bls12_381_fr';
++    return BLS12_381FrToken;
++}(ComparableToken));
++var BLS12_381G1Token = /** @class */ (function (_super) {
++    __extends(BLS12_381G1Token, _super);
++    function BLS12_381G1Token(val, idx, fac) {
++        var _this = _super.call(this, val, idx, fac) || this;
++        _this.val = val;
++        _this.idx = idx;
++        _this.fac = fac;
++        return _this;
++    }
++    BLS12_381G1Token.prototype.ToBigMapKey = function (val) {
++        return {
++            key: { bls12_381_fr: val },
++            type: { prim: BLS12_381G1Token.prim },
++        };
++    };
++    BLS12_381G1Token.prototype.isValid = function (val) {
++        return null
++    };
++    BLS12_381G1Token.prototype.Encode = function (args) {
++        var val = args.pop();
++        var err = this.isValid(val);
++        if (err) {
++            throw err;
++        }
++        return { bls12_381_fr: String(val).toString() };
++    };
++    BLS12_381G1Token.prototype.EncodeObject = function (val) {
++        var err = this.isValid(val);
++        if (err) {
++            throw err;
++        }
++        return { bls12_381_fr: String(val).toString() };
++    };
++    BLS12_381G1Token.prototype.Execute = function (val) {
++        return val.bls12_381_fr;
++    };
++    BLS12_381G1Token.prototype.ExtractSchema = function () {
++        return BLS12_381G1Token.prim;
++    };
++    // tslint:disable-next-line: variable-name
++    BLS12_381G1Token.prototype.ToKey = function (_a) {
++        var bls12_381_fr = _a.bls12_381_fr, string = _a.string;
++        if (string) {
++            return string;
++        }
++        return bls12_381_fr;
++    };
++    BLS12_381G1Token.prim = 'bls12_381_g1';
++    return BLS12_381G1Token;
++}(ComparableToken));
++
++var BLS12_381G2Token = /** @class */ (function (_super) {
++    __extends(BLS12_381G2Token, _super);
++    function BLS12_381G2Token(val, idx, fac) {
++        var _this = _super.call(this, val, idx, fac) || this;
++        _this.val = val;
++        _this.idx = idx;
++        _this.fac = fac;
++        return _this;
++    }
++    BLS12_381G2Token.prototype.ToBigMapKey = function (val) {
++        return {
++            key: { bls12_381_fr: val },
++            type: { prim: BLS12_381G2Token.prim },
++        };
++    };
++    BLS12_381G2Token.prototype.isValid = function (val) {
++        return null
++    };
++    BLS12_381G2Token.prototype.Encode = function (args) {
++        var val = args.pop();
++        var err = this.isValid(val);
++        if (err) {
++            throw err;
++        }
++        return { bls12_381_fr: String(val).toString() };
++    };
++    BLS12_381G2Token.prototype.EncodeObject = function (val) {
++        var err = this.isValid(val);
++        if (err) {
++            throw err;
++        }
++        return { bls12_381_fr: String(val).toString() };
++    };
++    BLS12_381G2Token.prototype.Execute = function (val) {
++        return val.bls12_381_fr;
++    };
++    BLS12_381G2Token.prototype.ExtractSchema = function () {
++        return BLS12_381G2Token.prim;
++    };
++    // tslint:disable-next-line: variable-name
++    BLS12_381G2Token.prototype.ToKey = function (_a) {
++        var bls12_381_fr = _a.bls12_381_fr, string = _a.string;
++        if (string) {
++            return string;
++        }
++        return bls12_381_fr;
++    };
++    BLS12_381G2Token.prim = 'bls12_381_g2';
++    return BLS12_381G2Token;
++}(ComparableToken));
++
++
++/* end */
++
+ var tokens = [
+     PairToken,
+     NatToken,
+@@ -72792,6 +72948,9 @@ var tokens = [
+     OperationToken,
+     SetToken,
+     ChainIDToken,
++    BLS12_381FrToken,
++    BLS12_381G1Token,
++    BLS12_381G2Token
+ ];
+ 
+ var InvalidTokenError = /** @class */ (function () {
+@@ -209346,6 +209505,9 @@ function execLigo(sourcePath, entryPoint) {
+             "ligolang/ligo:next",
+             "compile-contract",
+             "--michelson-format=json",
++            "-p",
++            "edo",
++            "--disable-michelson-typechecking",
+             fullInternalSourcePath,
+             entryPoint
+         ]);

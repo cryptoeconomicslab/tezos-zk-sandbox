@@ -42,6 +42,8 @@ const buildContract = (
       if (err) {
         console.log(`Error during ${contractName} built`);
         console.log(err);
+        console.error(stdout)
+        console.error(stderr)
       } else {
         console.log(`${contractName} built`);
         fs.writeFileSync(
@@ -59,7 +61,7 @@ program
   .command("build [contract]")
   .description("build contracts")
   .option("-o, --output_dir <dir>", "Where store builds", "build")
-  .option("-i, --input_dir <dir>", "Where files are located", "src")
+  .option("-i, --input_dir <dir>", "Where files are located", "contracts")
   .option("-j, --no-json", "The format of output file")
   .option("-g, --no-dockerized_ligo", "Switch global ligo")
   .action(function (contract, options) {
