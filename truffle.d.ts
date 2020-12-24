@@ -28,6 +28,7 @@ declare interface Artifacts {
 declare interface MainContractInstance {
   address: string;
   verify(): any;
+  use(index: number, funcName: string, ...args: any[]): any;
 }
 
 declare var artifacts: Artifacts;

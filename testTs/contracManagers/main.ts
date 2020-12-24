@@ -1,6 +1,6 @@
 import { ContractAbstraction, ContractProvider } from "@taquito/taquito";
 import { TransactionOperation } from "@taquito/taquito/dist/types/operations/transaction-operation";
-import { MainStorage } from "./types";
+import { MainStorage, Proof } from "./types";
 import { prepareProviderOptions } from "./utils";
 export const defaultTokenId = 0;
 
@@ -21,9 +21,18 @@ export class Main {
     tezos.setProvider(config);
   }
 
-  async verify(): Promise<TransactionOperation> {
+  async pairingCheck(proof: string[][]): Promise<TransactionOperation> {
     let operation = await this.contract.methods
-      .verifyGroth16(/* TODO: add proof */)
+    .pairingCheck(proof)
+      .send();
+
+    await operation.confirmation();
+    return operation;
+  }
+
+  async verify(proof: string[]): Promise<TransactionOperation> {
+    let operation = await this.contract.methods
+    .verifyGroth16(...proof)
       .send();
 
     await operation.confirmation();
