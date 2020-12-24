@@ -8,11 +8,12 @@
            (list (pair bls12_381_g1 bls12_381_g2))
            (option bool)
            { PAIRING_CHECK ; SOME } ;
+         LAMBDA bls12_381_g1 bls12_381_g1 { NEG } ;
          NIL operation ;
-         DIG 2 ;
+         DIG 3 ;
          UNPAIR ;
          IF_LEFT
-           { SWAP ; DROP ; DIG 2 ; SWAP ; EXEC ; SWAP ; PAIR }
+           { DIG 3 ; DROP ; SWAP ; DROP ; DIG 2 ; SWAP ; EXEC ; SWAP ; PAIR }
            { DUP ;
              DUG 2 ;
              CDR ;
@@ -104,6 +105,11 @@
              NIL (pair bls12_381_g1 bls12_381_g2) ;
              DIG 3 ;
              DIG 3 ;
+             DIG 8 ;
+             DUP ;
+             DUG 9 ;
+             SWAP ;
+             EXEC ;
              PAIR ;
              CONS ;
              DIG 3 ;
@@ -111,9 +117,17 @@
              DUP ;
              DUG 5 ;
              CDR ;
+             DIG 7 ;
+             DUP ;
+             DUG 8 ;
+             SWAP ;
+             EXEC ;
              PAIR ;
              CONS ;
              DUG 2 ;
+             DIG 5 ;
+             SWAP ;
+             EXEC ;
              PAIR ;
              CONS ;
              SWAP ;

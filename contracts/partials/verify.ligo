@@ -7,6 +7,11 @@ function pairing_check (const n : bls_l ) : bool_option is block {
     [%Michelson ({| {PAIRING_CHECK; SOME} |} : bls_l -> bool_option)];
 } with f (n)
 
+function neg_g1 (const n : bls12_381_g1 ) : bls12_381_g1 is block {
+  const f : (bls12_381_g1 -> bls12_381_g1) = 
+    [%Michelson ({| {NEG } |} : bls12_381_g1 -> bls12_381_g1)];
+} with f (n)
+
 function verify (
   var proof : groth16_proof
 ) : bool_option is block {
@@ -34,4 +39,4 @@ function verify (
     const vk_x0: bls12_381_g1 = vk_gamma_b * proof.0;
     const vk_x1: bls12_381_g1 = vk_gamma_c * proof.1;
     const vk_x = vk_x0 + vk_x1 + vk_gamma_a;
-  } with pairing_check(list [(proof.2, proof.3); (vk_x, vk_gamma); (proof.4, vk_delta); (vk_a, vk_b)])
+  } with pairing_check(list [(proof.2, proof.3); (neg_g1(vk_x), vk_gamma); (neg_g1(proof.4), vk_delta); (neg_g1(vk_a), vk_b)])
