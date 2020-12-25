@@ -2,12 +2,12 @@ type groth16_proof is (bls12_381_fr * bls12_381_fr * bls12_381_g1 * bls12_381_g2
 type bls_l is list(bls12_381_g1 * bls12_381_g2)
 type bool_option is option(bool)
 
-function pairing_check (const n : bls_l ) : bool_option is block {
+[@inline] function pairing_check (const n : bls_l ) : bool_option is block {
   const f : (bls_l -> bool_option) = 
     [%Michelson ({| {PAIRING_CHECK; SOME} |} : bls_l -> bool_option)];
 } with f (n)
 
-function neg_g1 (const n : bls12_381_g1 ) : bls12_381_g1 is block {
+[@inline] function neg_g1 (const n : bls12_381_g1 ) : bls12_381_g1 is block {
   const f : (bls12_381_g1 -> bls12_381_g1) = 
     [%Michelson ({| {NEG } |} : bls12_381_g1 -> bls12_381_g1)];
 } with f (n)

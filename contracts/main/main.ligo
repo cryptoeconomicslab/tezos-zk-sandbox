@@ -2,7 +2,7 @@
 
 (* contract storage *)
 type storage is record[
-  result: bool_option;
+  result: bool;
 ]
 
 (* define return for readability *)
@@ -29,14 +29,20 @@ function verifyGroth16 (
   var proof : groth16_proof;
   var s: storage
 ) : return is block {
-  s.result := verify(proof);
+  case verify(proof) of
+    |Some(result) -> s.result := result
+    |None -> failwith("none?")
+  end;
 } with (noOperations, s)
 
 function pairingCheck (
   var proof : bls_l;
   var s: storage
 ) : return is block {
-  s.result := pairing_check(proof);
+  case pairing_check(proof) of
+    |Some(result) -> s.result := result
+    |None -> failwith("none?")
+  end;
 } with (noOperations, s)
 
 (* Main entrypoint *)

@@ -3,17 +3,16 @@
         (pair %verifyGroth16
            (pair (pair (pair bls12_381_fr bls12_381_fr) bls12_381_g1) bls12_381_g2)
            bls12_381_g1)) ;
-  storage (option bool) ;
-  code { LAMBDA
-           (list (pair bls12_381_g1 bls12_381_g2))
-           (option bool)
-           { PAIRING_CHECK ; SOME } ;
-         LAMBDA bls12_381_g1 bls12_381_g1 { NEG } ;
-         NIL operation ;
-         DIG 3 ;
+  storage bool ;
+  code { NIL operation ;
+         SWAP ;
          UNPAIR ;
          IF_LEFT
-           { DIG 3 ; DROP ; SWAP ; DROP ; DIG 2 ; SWAP ; EXEC ; SWAP ; PAIR }
+           { PAIRING_CHECK ;
+             SOME ;
+             IF_NONE { PUSH string "none?" ; FAILWITH } { SWAP ; DROP } ;
+             SWAP ;
+             PAIR }
            { DUP ;
              DUG 2 ;
              CDR ;
@@ -44,8 +43,6 @@
              PAIR ;
              PAIR ;
              PAIR ;
-             SWAP ;
-             DROP ;
              UNIT ;
              DROP 1 ;
              PUSH @vk_gamma_c
@@ -105,11 +102,7 @@
              NIL (pair bls12_381_g1 bls12_381_g2) ;
              DIG 3 ;
              DIG 3 ;
-             DIG 8 ;
-             DUP ;
-             DUG 9 ;
-             SWAP ;
-             EXEC ;
+             NEG ;
              PAIR ;
              CONS ;
              DIG 3 ;
@@ -117,17 +110,11 @@
              DUP ;
              DUG 5 ;
              CDR ;
-             DIG 7 ;
-             DUP ;
-             DUG 8 ;
-             SWAP ;
-             EXEC ;
+             NEG ;
              PAIR ;
              CONS ;
              DUG 2 ;
-             DIG 5 ;
-             SWAP ;
-             EXEC ;
+             NEG ;
              PAIR ;
              CONS ;
              SWAP ;
@@ -142,9 +129,9 @@
              CAR ;
              PAIR ;
              CONS ;
-             DIG 2 ;
-             SWAP ;
-             EXEC ;
+             PAIRING_CHECK ;
+             SOME ;
+             IF_NONE { PUSH string "none?" ; FAILWITH } { SWAP ; DROP } ;
              SWAP ;
              PAIR } } }
 
