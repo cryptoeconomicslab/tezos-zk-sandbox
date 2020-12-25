@@ -1,10 +1,9 @@
 type groth16_proof is (bls12_381_fr * bls12_381_fr * bls12_381_g1 * bls12_381_g2 * bls12_381_g1)
 type bls_l is list(bls12_381_g1 * bls12_381_g2)
-type bool_option is option(bool)
 
-[@inline] function pairing_check (const n : bls_l ) : bool_option is block {
-  const f : (bls_l -> bool_option) = 
-    [%Michelson ({| {PAIRING_CHECK; SOME} |} : bls_l -> bool_option)];
+[@inline] function pairing_check (const n : bls_l ) : bool is block {
+  const f : (bls_l -> bool) = 
+    [%Michelson ({| {PAIRING_CHECK } |} : bls_l -> bool)];
 } with f (n)
 
 [@inline] function neg_g1 (const n : bls12_381_g1 ) : bls12_381_g1 is block {
@@ -14,7 +13,7 @@ type bool_option is option(bool)
 
 function verify (
   var proof : groth16_proof
-) : bool_option is block {
+) : bool is block {
     const vk_gamma_c: bls12_381_g1 = ([%Michelson ({| 
       { DROP 1; PUSH @vk_gamma_c bls12_381_g1 0x102bae3361383e2cef7d4aed348743201f6fd5fd25f4400d0888451a5556cd980f311510e6457e36fe8f3309472695390cf8968b8d779e53c04632588e402ae5884cc49ee3988159ede6a292fb3b9cd1071eec4bf3fffe51b7325184cadeab1d; }
     |} : unit -> bls12_381_g1)])(unit);
@@ -36,7 +35,5 @@ function verify (
     const vk_a: bls12_381_g1 = ([%Michelson ({| 
       { DROP 1; PUSH @vk_a bls12_381_g1 0x169d7633e3da4d413bf1918c412fc54c548ddf641a423f47b61ca883c0ba1b85f5ee13dd63d7c1661cc4fe2ca38f00e1065dbcfb2123f8258ae2b3cf92035485f621e55d433b1f251ad37c02ae2b3ec6a1658ae23bbc77649878ec0871a6d8f1; }
     |} : unit -> bls12_381_g1)])(unit);
-    const vk_x0: bls12_381_g1 = vk_gamma_b * proof.0;
-    const vk_x1: bls12_381_g1 = vk_gamma_c * proof.1;
-    const vk_x = vk_x0 + vk_x1 + vk_gamma_a;
+    const vk_x = (vk_gamma_b * proof.0) + (vk_gamma_c * proof.1) + vk_gamma_a;
   } with pairing_check(list [(proof.2, proof.3); (neg_g1(vk_x), vk_gamma); (neg_g1(proof.4), vk_delta); (neg_g1(vk_a), vk_b)])

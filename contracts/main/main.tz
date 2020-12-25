@@ -9,8 +9,7 @@
          UNPAIR ;
          IF_LEFT
            { PAIRING_CHECK ;
-             SOME ;
-             IF_NONE { PUSH string "none?" ; FAILWITH } { SWAP ; DROP } ;
+             IF { DROP ; PUSH bool True } { PUSH string "none?" ; FAILWITH } ;
              SWAP ;
              PAIR }
            { DUP ;
@@ -78,14 +77,7 @@
              PUSH @vk_a
                bls12_381_g1
                0x169d7633e3da4d413bf1918c412fc54c548ddf641a423f47b61ca883c0ba1b85f5ee13dd63d7c1661cc4fe2ca38f00e1065dbcfb2123f8258ae2b3cf92035485f621e55d433b1f251ad37c02ae2b3ec6a1658ae23bbc77649878ec0871a6d8f1 ;
-             DIG 7 ;
-             DUP ;
-             DUG 8 ;
-             CAR ;
-             CAR ;
-             CAR ;
-             DIG 6 ;
-             MUL ;
+             DIG 4 ;
              DIG 7 ;
              DUP ;
              DUG 8 ;
@@ -94,9 +86,14 @@
              CDR ;
              DIG 7 ;
              MUL ;
-             DIG 6 ;
-             SWAP ;
-             DIG 2 ;
+             DIG 7 ;
+             DUP ;
+             DUG 8 ;
+             CAR ;
+             CAR ;
+             CAR ;
+             DIG 7 ;
+             MUL ;
              ADD ;
              ADD ;
              NIL (pair bls12_381_g1 bls12_381_g2) ;
@@ -130,8 +127,7 @@
              PAIR ;
              CONS ;
              PAIRING_CHECK ;
-             SOME ;
-             IF_NONE { PUSH string "none?" ; FAILWITH } { SWAP ; DROP } ;
+             IF { DROP ; PUSH bool True } { PUSH string "none?" ; FAILWITH } ;
              SWAP ;
              PAIR } } }
 

@@ -19,4 +19,4 @@ npm test
 
 - [x] connecting to tezos node(edo protocol)
 - [x] compile LIGO code using new op-code
-- [] pass test with valid proof
+- [x] pass test with valid proof

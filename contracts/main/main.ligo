@@ -29,20 +29,14 @@ function verifyGroth16 (
   var proof : groth16_proof;
   var s: storage
 ) : return is block {
-  case verify(proof) of
-    |Some(result) -> s.result := result
-    |None -> failwith("none?")
-  end;
+  if verify(proof) then s.result := True else failwith("none?");
 } with (noOperations, s)
 
 function pairingCheck (
   var proof : bls_l;
   var s: storage
 ) : return is block {
-  case pairing_check(proof) of
-    |Some(result) -> s.result := result
-    |None -> failwith("none?")
-  end;
+  if pairing_check(proof) then s.result := True else failwith("none?");
 } with (noOperations, s)
 
 (* Main entrypoint *)
