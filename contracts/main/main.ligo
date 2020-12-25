@@ -29,14 +29,14 @@ function verifyGroth16 (
   var proof : groth16_proof;
   var s: storage
 ) : return is block {
-  if verify(proof) then s.result := True else failwith("none?");
+  if verify(proof) then s.result := True else failwith("invalid proof");
 } with (noOperations, s)
 
 function pairingCheck (
   var proof : bls_l;
   var s: storage
 ) : return is block {
-  if pairing_check(proof) then s.result := True else failwith("none?");
+  if pairing_check(proof) then s.result := True else failwith("invalid pair");
 } with (noOperations, s)
 
 (* Main entrypoint *)
