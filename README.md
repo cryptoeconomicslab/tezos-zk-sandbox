@@ -15,6 +15,8 @@ npm run compile
 npm test
 ```
 
+3. if you want to modify zokrates program, check ./zokrates-program/main.zok and run compile.sh.
+
 ## Roadmap
 
 - [x] connecting to tezos node(edo protocol)
