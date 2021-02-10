@@ -28,3 +28,7 @@ npm test
 - [x] connecting to tezos node(edo protocol)
 - [x] compile LIGO code using new op-code
 - [x] pass test with valid proof
+
+### Troubles
+
+If you see error "Http error response: (404)", you should delete "build/contracts" folder and deploy contracts again.
