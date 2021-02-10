@@ -1,5 +1,11 @@
 # Tezos Sandbox
 
+### Requirements
+
+* [LIGO](https://ligolang.org/docs/next/intro/installation)
+* Docker
+
+
 1. start texos node
 
 run tezos node with another terminal.
